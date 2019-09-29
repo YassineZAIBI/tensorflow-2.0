@@ -11,15 +11,20 @@ import datetime
 
 
 class Rnn_model (tf.keras.Model): 
-    def __init__(self , units1 = 64 , epoch = 5 ): 
+    def __init__(self, units1=64,
+                 epoch=5): 
         super(Rnn_model).__init()
         self.initializer1 = tf.keras.initializers.lecun_normal(seed = 73)
-        self.units11 = units1 
-        self.lstm_layer1 = tf.keras.layers.LSTM(units = self.units1 , return_sequences=True, kernel_initializer = self.initializer1)
+        self.units11 = units1
+        self.lstm_layer1 = tf.keras.layers.LSTM(units=self.units1,
+                                                return_sequences=True,
+                                                kernel_initializer=self.initializer1)
         self.lstm_dropout1  = tf.keras.layers.Dropout(rate = 0.2)
-        self.lstm_dense1 = tf.keras.layers.Dense(units = 1, activation = "sigmoid" )
+        self.lstm_dense1 = tf.keras.layers.Dense(units=1,
+                                                 activation ="sigmoid" )
         self.loss_object = tf.keras.losses.CategoricalCrossentropy()
-        self.optimizer = tf.keras.optimizers.RMSprop(learning_rate = 0.01 , momentum = 0.6)
+        self.optimizer = tf.keras.optimizers.RMSprop(learning_rate=0.01,
+                                                     momentum=0.9)
         self.train_loss = tf.keras.metrics.Mean(name='train_loss')
         self.train_accuracy = tf.keras.metrics.CategoricalAccuracy(name='train_accuracy')
         self.test_loss = tf.keras.metrics.Mean(name='test_loss')
